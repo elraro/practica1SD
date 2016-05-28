@@ -1,0 +1,38 @@
+body {
+	padding-top: 60px;
+	background: #ffffff url("../images/fondo.jpg") no-repeat center center;
+}
+
+.portada {
+	padding: 40px 15px;
+	text-align: center;
+}
+
+.areas {
+	padding: 20px 15px;
+	text-align: center;
+}
+
+.mediano {
+	font-size: medium !important;
+}
+
+.col-center-block {
+	float: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.centrado {
+	text-align: center;
+}
+
+.margen {
+	margin-bottom: 3px;
+}
+
+.imagen-especie {
+	width: 50px;
+	height: 50px;
+}

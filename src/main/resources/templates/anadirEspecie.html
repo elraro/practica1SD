@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="description"
+	content="Parque Natural de Cabárceno. Gestión de áreas" />
+<meta name="author" content="Alberto de Dios, Miguel Tapia" />
+<link rel="icon" th:href="@{/images/favicon.ico}" />
+
+<title>Parque Natural de Cabárceno :: Gestión de especies ::
+	Añadir especie</title>
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<!-- CSS -->
+<link th:href="@{/css/estilo.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Parque Natural de Cabárceno</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Portada</a></li>
+					<li><a href="/areas">Gestión de áreas</a></li>
+					<li class="active"><a href="/especies">Gestión de especies</a></li>
+					<li><a href="/personal">Gestión de personal</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="jumbotron areas">
+			<div class="row">
+				<div class="col-md-4 col-center-block">
+					<form action="/especies" method="post"
+						enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="labelNombreCientifico">Nombre científico</label> <input
+								type="text" class="form-control" name="nombreCientifico"
+								placeholder="Nombre científico" required="required"
+								maxlength="40" />
+						</div>
+						<div class="form-group">
+							<label for="labelNombre">Nombre común</label> <input type="text"
+								class="form-control" name="nombreComun"
+								placeholder="Nombre común" required="required" maxlength="40" />
+						</div>
+						<div class="form-group">
+							<label for="labelTipo">Tipo</label> <select name="tipo"
+								class="form-control" th:remove="all-but-first"
+								required="required">
+								<option
+									th:each="tipo : ${T(sd.practica1.model.TipoEspecie).values()}"
+									th:value="${tipo}" th:text="${tipo.value}"
+									th:selected="${tipo == T(sd.practica1.model.TipoEspecie).ANIMAL}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="labelAreas">Areas</label> <select name="areas"
+								class="form-control" multiple="multiple" required="required">
+								<option th:each="area : ${areas}" th:value="${area.id}"
+									th:text="${area.nombre}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="labelFoto">Fotografía</label> <input type="file"
+								name="fichero" accept="image/*" required="required" />
+						</div>
+						<button type="submit" class="btn btn-primary">Añadir</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</body>
+</html>

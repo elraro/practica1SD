@@ -1,0 +1,99 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8" />
+<meta name="description"
+	content="Parque Natural de Cabárceno. Gestión de áreas" />
+<meta name="author" content="Alberto de Dios, Miguel Tapia" />
+<link rel="icon" th:href="@{/images/favicon.ico}" />
+
+<title>Parque Natural de Cabárceno :: Gestión de áreas</title>
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" />
+
+<!-- CSS -->
+<link th:href="@{/css/estilo.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Parque Natural de Cabárceno</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Portada</a></li>
+					<li class="active"><a href="/areas">Gestión de áreas</a></li>
+					<li><a href="/especies">Gestión de especies</a></li>
+					<li><a href="/personal">Gestión de personal</a></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="jumbotron areas">
+			<div class="alert alert-danger" role="alert"
+				th:if="${existe != null}">Ya existe ese área. No se puede
+				añadir áreas repetidas.</div>
+			<div class="alert alert-danger" role="alert"
+				th:if="${noexiste != null}">No existe ese área.</div>
+			<div class="alert alert-success" role="alert"
+				th:if="${anadido != null}">Área añadida correctamente.</div>
+			<div class="alert alert-success" role="alert"
+				th:if="${borrado != null}">Área borrada correctamente.</div>
+			<div class="alert alert-success" role="alert"
+				th:if="${modificado != null}">Área modificada correctamente.</div>
+			<div class="alert alert-danger" role="alert"
+				th:if="${#lists.isEmpty(areas)}">No hay areas en el parque.</div>
+			<table class="table table-hover" th:if="${not #lists.isEmpty(areas)}">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Extensión</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="area : ${areas}">
+						<th scope="row" th:text="${areaStat.index + 1}"></th>
+						<td th:text="${area.nombre}"></td>
+						<td th:text="${area.extension}"></td>
+						<td class="centrado"><a th:href="@{/areas/borrar/} + ${area.id}"
+							class="btn btn-danger btn-xs margen">Borrar</a> <a
+							th:href="@{/areas/modificar/} + ${area.id}"
+							class="btn btn-success btn-xs margen">Modificar</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<p>
+				<a href="/areas/anadir" class="btn btn-primary">Añadir área</a>
+			</p>
+		</div>
+
+	</div>
+	<!-- /.container -->
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript"
+		th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</body>
+</html>
